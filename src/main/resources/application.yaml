@@ -10,3 +10,9 @@ spring:
     jpa:
       hibernate:
         ddl-auto: validate
+
+management:
+  otlp:
+    metrics:
+      export:
+        enabled: false
