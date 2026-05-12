@@ -1,8 +1,9 @@
 package com.pk.couponRedemption.service;
 
 import com.pk.couponRedemption.api.coupon.dto.NewCouponRequest;
-import com.pk.couponRedemption.exception.CouponAlreadyExistsException;
+import com.pk.couponRedemption.exception.coupon.CouponAlreadyExistsException;
 import com.pk.couponRedemption.repository.CouponRepository;
+import com.pk.couponRedemption.service.coupon.CouponRegistrationService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

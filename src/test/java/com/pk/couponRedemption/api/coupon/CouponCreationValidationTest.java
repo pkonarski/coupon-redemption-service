@@ -1,7 +1,7 @@
 package com.pk.couponRedemption.api.coupon;
 
 import com.pk.couponRedemption.api.shared.dto.CustomErrorResponse;
-import com.pk.couponRedemption.service.CouponRegistrationService;
+import com.pk.couponRedemption.service.coupon.CouponRegistrationService;
 import org.assertj.core.api.InstanceOfAssertFactories;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

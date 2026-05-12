@@ -1,9 +1,9 @@
-package com.pk.couponRedemption.service;
+package com.pk.couponRedemption.service.coupon;
 
 import com.pk.couponRedemption.api.coupon.dto.CouponResponse;
 import com.pk.couponRedemption.api.coupon.dto.NewCouponRequest;
 import com.pk.couponRedemption.domain.Coupon;
-import com.pk.couponRedemption.exception.CouponAlreadyExistsException;
+import com.pk.couponRedemption.exception.coupon.CouponAlreadyExistsException;
 import com.pk.couponRedemption.mapper.CouponMapper;
 import com.pk.couponRedemption.repository.CouponRepository;
 import lombok.RequiredArgsConstructor;

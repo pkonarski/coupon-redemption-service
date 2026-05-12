@@ -1,4 +1,4 @@
-package com.pk.couponRedemption.exception;
+package com.pk.couponRedemption.exception.coupon;
 
 public class CouponAlreadyExistsException extends RuntimeException {
     private CouponAlreadyExistsException(String message) {

@@ -1,10 +1,9 @@
-package com.pk.couponRedemption.service;
+package com.pk.couponRedemption.service.coupon;
 
-import com.pk.couponRedemption.api.coupon.dto.CouponUseRequest;
 import com.pk.couponRedemption.domain.Coupon;
 import com.pk.couponRedemption.domain.CouponUsage;
-import com.pk.couponRedemption.exception.CouponNotFoundException;
-import com.pk.couponRedemption.exception.CouponUsageException;
+import com.pk.couponRedemption.exception.coupon.CouponNotFoundException;
+import com.pk.couponRedemption.exception.coupon.CouponUsageException;
 import com.pk.couponRedemption.repository.CouponRepository;
 import com.pk.couponRedemption.repository.CouponUsageRepository;
 import lombok.RequiredArgsConstructor;
@@ -32,8 +31,10 @@ public class CouponUsageService {
         if(!incremented) {
             Coupon couponAfterIncrement = couponRepository.findByCodeAndCountryCode(code, countryCode).orElseThrow();
             throw couponAfterIncrement.isLimitReached() ? CouponUsageException.whenLimitReached(couponAfterIncrement.getCode()) :
-                    new RuntimeException("Coupon usage was not increased. Unknown error occurred");
+                    new RuntimeException("Coupon usage was not increased. Unknown error occurred. Coupon data: " + couponAfterIncrement);
         }
+
+        return couponUsage;
     }
 
     private CouponUsage createCouponUsage(Coupon coupon, String userId) {

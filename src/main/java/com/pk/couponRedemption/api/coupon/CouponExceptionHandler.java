@@ -1,7 +1,7 @@
 package com.pk.couponRedemption.api.coupon;
 
 import com.pk.couponRedemption.api.shared.dto.CustomErrorResponse;
-import com.pk.couponRedemption.exception.CouponAlreadyExistsException;
+import com.pk.couponRedemption.exception.coupon.CouponAlreadyExistsException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;

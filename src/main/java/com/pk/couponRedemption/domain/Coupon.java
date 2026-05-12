@@ -5,6 +5,7 @@ import lombok.Getter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -20,7 +21,7 @@ public class Coupon {
     private String code;
 
     @CreationTimestamp
-    @Column(name = "created_at", updatable = false)
+    @Column(name = "created_at", updatable = false, nullable = false)
     private Instant createdAt;
 
     @Column(name = "max_usages", nullable = false)
@@ -45,5 +46,9 @@ public class Coupon {
         coupon.countryCode = countryCode;
 
         return coupon;
+    }
+
+    public boolean isLimitReached() {
+        return currentUsages >= maxUsages;
     }
 }

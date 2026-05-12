@@ -1,7 +1,7 @@
-package com.pk.couponRedemption.exception;
+package com.pk.couponRedemption.exception.geolocation;
 
-public class UserCountryCodeParseException extends Exception {
-    public UserCountryCodeParseException(String message) {
-        super(message);
+public class UserCountryCodeParseException extends RuntimeException {
+    public UserCountryCodeParseException(String message, Throwable rootCause) {
+        super(message, rootCause);
     }
 }

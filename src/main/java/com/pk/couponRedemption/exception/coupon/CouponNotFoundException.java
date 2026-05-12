@@ -1,4 +1,4 @@
-package com.pk.couponRedemption.exception;
+package com.pk.couponRedemption.exception.coupon;
 
 public class CouponNotFoundException extends RuntimeException {
     public CouponNotFoundException(String code, String countryCode) {

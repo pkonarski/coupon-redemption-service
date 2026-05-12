@@ -1,4 +1,4 @@
-package com.pk.couponRedemption.exception;
+package com.pk.couponRedemption.exception.coupon;
 
 public class CouponUsageException extends RuntimeException {
     private CouponUsageException(String message) { super(message); }

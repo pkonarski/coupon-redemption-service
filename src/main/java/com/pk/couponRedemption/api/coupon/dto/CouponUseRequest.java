@@ -1,4 +1,9 @@
 package com.pk.couponRedemption.api.coupon.dto;
 
-public class CouponUseRequest {
+import jakarta.validation.constraints.NotBlank;
+
+public record CouponUseRequest(
+        @NotBlank String userId
+) {
+
 }
