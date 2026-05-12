@@ -2,8 +2,6 @@ package com.pk.couponRedemption.api.shared.dto;
 
 import org.slf4j.MDC;
 
-import java.util.Map;
-
 public record CustomErrorResponse(
         String message,
         String traceId,
@@ -11,14 +9,14 @@ public record CustomErrorResponse(
 ) {
 
     public CustomErrorResponse(String message) {
-        this(message, getTraceId(), Map.of());
+        this(message, getTraceId(), null);
     }
 
     public CustomErrorResponse(String message, Object details) {
         this(message, getTraceId(), details);
     }
 
-    public static String getTraceId() {
+    private static String getTraceId() {
         String traceId = MDC.get("traceId");
         return traceId != null ? traceId : "trace-id-unavailable";
     }
