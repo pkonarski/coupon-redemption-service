@@ -29,7 +29,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
             @NonNull Exception ex, Object body, @NonNull HttpHeaders headers,
             @NonNull HttpStatusCode status, @NonNull WebRequest request) {
 
-        log.error("Exception occurred during request processing", ex);
+        log.warn("Exception occurred during request processing", ex);
 
         if(body instanceof CustomErrorResponse) {
             return ResponseEntity.status(status).headers(headers).body(body);

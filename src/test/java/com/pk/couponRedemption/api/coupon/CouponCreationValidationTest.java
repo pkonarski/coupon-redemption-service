@@ -1,6 +1,7 @@
 package com.pk.couponRedemption.api.coupon;
 
 import com.pk.couponRedemption.api.shared.dto.CustomErrorResponse;
+import com.pk.couponRedemption.service.CouponRegistrationService;
 import org.assertj.core.api.InstanceOfAssertFactories;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -9,6 +10,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import tools.jackson.databind.ObjectMapper;
 
@@ -23,6 +25,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(CouponController.class)
 public class CouponCreationValidationTest {
+    @MockitoBean
+    private CouponRegistrationService couponRegistrationService;
+
     @Autowired
     private MockMvc mockMvc;
 
@@ -33,7 +38,7 @@ public class CouponCreationValidationTest {
     @MethodSource("provideInvalidRequests")
     void shouldReturn400WithErrorDetailsWhenInvalidCouponCreateRequest(String request, Map<String, String> errorDetails) throws Exception {
         var result = mockMvc.perform(
-                        post("/api/coupons/create")
+                        post("/api/coupons")
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(request)
                 )
@@ -79,7 +84,7 @@ public class CouponCreationValidationTest {
                               "maxUsages": -2
                           }
                           """,
-                        Map.of("maxUsages", "must be greater than 0")
+                        Map.of("maxUsages", "must be greater than or equal to 1")
                 ),
                 Arguments.of(
                         """
@@ -89,7 +94,7 @@ public class CouponCreationValidationTest {
                               "maxUsages": -2
                           }
                           """,
-                        Map.of("code", "must not be blank", "countryCode", "Invalid ISO country code", "maxUsages", "must be greater than 0")
+                        Map.of("code", "must not be blank", "countryCode", "Invalid ISO country code", "maxUsages", "must be greater than or equal to 1")
                 )
         );
     }
@@ -105,7 +110,7 @@ public class CouponCreationValidationTest {
                           """;
 
         mockMvc.perform(
-                        post("/api/coupons/create")
+                        post("/api/coupons")
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(request)
                 )
