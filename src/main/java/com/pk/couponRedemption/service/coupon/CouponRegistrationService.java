@@ -35,7 +35,7 @@ public class CouponRegistrationService {
             log.info("Coupon for code: {} created", couponCode);
             return couponCreationResponse;
         } catch (DataIntegrityViolationException e) {
-            throw CouponAlreadyExistsException.whenDatabaseWriteConflictedOnExistingCoupon(couponCode);
+            throw CouponAlreadyExistsException.whenDatabaseWriteConflictedOnExistingCoupon(couponCode, e);
         }
     }
 }
