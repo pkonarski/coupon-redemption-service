@@ -16,8 +16,8 @@ public class IPApiGeolocation implements UserGeolocationStrategy {
     private final RestClient restClient;
     private final AtomicLong rateLimitingResetTimestamp = new AtomicLong(0);
 
-    public IPApiGeolocation(RestClient.Builder builder) {
-        this.restClient = builder.baseUrl(IP_API_BASE_URL).build();
+    public IPApiGeolocation() {
+        this.restClient = RestClient.builder().baseUrl(IP_API_BASE_URL).build();
     }
 
     @Override

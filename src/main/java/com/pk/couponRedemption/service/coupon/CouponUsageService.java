@@ -26,9 +26,9 @@ public class CouponUsageService {
         if(fetchedCoupon.isEmpty()) throw new CouponNotFoundException(code, countryCode);
         CouponUsage couponUsage = createCouponUsage(fetchedCoupon.get(), userId);
 
-        boolean incremented = couponRepository.incrementCodeUsage(code);
+        int incremented = couponRepository.incrementCodeUsage(code);
 
-        if(!incremented) {
+        if(incremented == 0) {
             Coupon couponAfterIncrement = couponRepository.findByCodeAndCountryCode(code, countryCode).orElseThrow();
             throw couponAfterIncrement.isLimitReached() ? CouponUsageException.whenLimitReached(couponAfterIncrement.getCode()) :
                     new RuntimeException("Coupon usage was not increased. Unknown error occurred. Coupon data: " + couponAfterIncrement);

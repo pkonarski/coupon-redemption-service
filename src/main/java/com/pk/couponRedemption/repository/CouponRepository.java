@@ -20,5 +20,5 @@ public interface CouponRepository extends JpaRepository<Coupon, UUID> {
             SET c.currentUsages = c.currentUsages + 1
             WHERE c.code = :code AND c.currentUsages < c.maxUsages
     """)
-    boolean incrementCodeUsage(@Param("code") String code);
+    int incrementCodeUsage(@Param("code") String code);
 }
