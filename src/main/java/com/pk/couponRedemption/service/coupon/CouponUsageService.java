@@ -22,19 +22,21 @@ public class CouponUsageService {
 
     @Transactional
     public CouponUsage useCoupon(String code, String countryCode, String userId) {
-        log.info("User with id: {} is trying to use coupon with code {}.", userId, code);
-        Optional<Coupon> fetchedCoupon = couponRepository.findByCode(code);
+        String normalizedCode = Coupon.normalizeCode(code);
 
-        if(fetchedCoupon.isEmpty()) throw new CouponNotFoundException(code, countryCode);
-        if(!fetchedCoupon.get().getCountryCode().equals(countryCode)) throw new CouponReservedForDifferentCountryException(code, countryCode);
+        log.info("User with id: {} is trying to use coupon with code {}.", userId, code);
+        Optional<Coupon> fetchedCoupon = couponRepository.findByCode(normalizedCode);
+
+        if(fetchedCoupon.isEmpty()) throw new CouponNotFoundException(normalizedCode, countryCode);
+        if(!fetchedCoupon.get().getCountryCode().equals(countryCode)) throw new CouponReservedForDifferentCountryException(normalizedCode, countryCode);
 
         CouponUsage couponUsage = createCouponUsage(fetchedCoupon.get(), userId);
 
-        int incremented = couponRepository.incrementCodeUsage(code);
+        int incremented = couponRepository.incrementCodeUsage(normalizedCode);
 
         if(incremented == 0) {
-            Coupon couponAfterIncrement = couponRepository.findByCode(code).orElseThrow();
-            throw couponAfterIncrement.isLimitReached() ? new CouponLimitReachedException(code) :
+            Coupon couponAfterIncrement = couponRepository.findByCode(normalizedCode).orElseThrow();
+            throw couponAfterIncrement.isLimitReached() ? new CouponLimitReachedException(normalizedCode) :
                     new RuntimeException("Coupon usage was not increased. Unknown error occurred. Coupon data: " + couponAfterIncrement);
         }
 

@@ -14,7 +14,7 @@ public interface CouponRepository extends JpaRepository<Coupon, UUID> {
 
     Optional<Coupon> findByCode(String code);
 
-    @Modifying
+    @Modifying(clearAutomatically = true)
     @Query("""
             UPDATE Coupon c
             SET c.currentUsages = c.currentUsages + 1

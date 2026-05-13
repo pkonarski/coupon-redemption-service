@@ -42,11 +42,15 @@ public class Coupon {
 
         Coupon coupon = new Coupon();
 
-        coupon.code = code.toUpperCase(Locale.ROOT);
+        coupon.code = normalizeCode(code);
         coupon.maxUsages = maxUsages;
         coupon.countryCode = countryCode;
 
         return coupon;
+    }
+
+    public static String normalizeCode(String code) {
+        return code.toUpperCase(Locale.ROOT);
     }
 
     public boolean isLimitReached() {
