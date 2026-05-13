@@ -1,6 +1,7 @@
 package com.pk.couponRedemption.api.coupon;
 
 import com.pk.couponRedemption.api.shared.dto.CustomErrorResponse;
+import com.pk.couponRedemption.service.coupon.CouponRedemptionService;
 import com.pk.couponRedemption.service.coupon.CouponRegistrationService;
 import org.assertj.core.api.InstanceOfAssertFactories;
 import org.junit.jupiter.api.Test;
@@ -27,6 +28,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class CouponCreationValidationTest {
     @MockitoBean
     private CouponRegistrationService couponRegistrationService;
+
+    @MockitoBean
+    private CouponRedemptionService couponRedemptionService;
 
     @Autowired
     private MockMvc mockMvc;
