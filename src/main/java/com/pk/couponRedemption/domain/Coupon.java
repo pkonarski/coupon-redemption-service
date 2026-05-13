@@ -6,6 +6,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -41,7 +42,7 @@ public class Coupon {
 
         Coupon coupon = new Coupon();
 
-        coupon.code = code.toUpperCase();
+        coupon.code = code.toUpperCase(Locale.ROOT);
         coupon.maxUsages = maxUsages;
         coupon.countryCode = countryCode;
 

@@ -4,4 +4,4 @@ CREATE TABLE IF NOT EXISTS coupons_usage (
     user_id VARCHAR(64) NOT NULL,
     coupon_id UUID REFERENCES coupons(id) NOT NULL,
     CONSTRAINT coupon_for_user UNIQUE (user_id, coupon_id)
-)
+);
