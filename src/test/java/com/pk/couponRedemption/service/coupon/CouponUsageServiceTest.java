@@ -6,12 +6,15 @@ import com.pk.couponRedemption.exception.coupon.CouponAlreadyUsedByUserException
 import com.pk.couponRedemption.exception.coupon.CouponLimitReachedException;
 import com.pk.couponRedemption.exception.coupon.CouponNotFoundException;
 import com.pk.couponRedemption.exception.coupon.CouponReservedForDifferentCountryException;
+import com.pk.couponRedemption.mapper.CouponMapper;
 import com.pk.couponRedemption.repository.CouponRepository;
 import com.pk.couponRedemption.repository.CouponUsageRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mapstruct.factory.Mappers;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -34,12 +37,8 @@ public class CouponUsageServiceTest {
     @Mock
     private CouponUsageRepository couponUsageRepository;
 
+    @InjectMocks
     private CouponUsageService couponUsageService;
-
-    @BeforeEach
-    void setup() {
-        couponUsageService = new CouponUsageService(couponRepository, couponUsageRepository);
-    }
 
     @Test
     void shouldUseCouponWhenAvailable() {
