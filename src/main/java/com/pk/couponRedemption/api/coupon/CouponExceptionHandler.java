@@ -2,6 +2,7 @@ package com.pk.couponRedemption.api.coupon;
 
 import com.pk.couponRedemption.api.shared.dto.CustomErrorResponse;
 import com.pk.couponRedemption.exception.coupon.*;
+import com.pk.couponRedemption.exception.geolocation.UserCountryCodeParseException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -43,6 +44,14 @@ public class CouponExceptionHandler {
     @ResponseStatus(HttpStatus.CONFLICT)
     public CustomErrorResponse handleCouponAlreadyUsedByUser(CouponAlreadyUsedByUserException e) {
         String message = "Coupon already used";
+        log.warn(message, e);
+        return new CustomErrorResponse(message);
+    }
+
+    @ExceptionHandler(UserCountryCodeParseException.class)
+    @ResponseStatus(HttpStatus.SERVICE_UNAVAILABLE)
+    public CustomErrorResponse handleUserCountryCodeParseError(UserCountryCodeParseException e) {
+        String message = "Coupon service is currently unavailable. Check again in few minutes.";
         log.warn(message, e);
         return new CustomErrorResponse(message);
     }
