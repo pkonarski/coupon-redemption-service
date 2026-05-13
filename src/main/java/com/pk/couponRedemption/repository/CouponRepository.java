@@ -12,7 +12,7 @@ import java.util.UUID;
 public interface CouponRepository extends JpaRepository<Coupon, UUID> {
     boolean existsByCode(String code);
 
-    Optional<Coupon> findByCodeAndCountryCode(String code, String countryCode);
+    Optional<Coupon> findByCode(String code);
 
     @Modifying
     @Query("""
