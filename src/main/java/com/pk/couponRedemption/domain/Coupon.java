@@ -2,10 +2,10 @@ package com.pk.couponRedemption.domain;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.Instant;
-import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.UUID;
@@ -13,6 +13,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "coupons")
 @Getter
+@ToString
 public class Coupon {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

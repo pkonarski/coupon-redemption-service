@@ -37,7 +37,7 @@ public class CouponUsageService {
         if(incremented == 0) {
             Coupon couponAfterIncrement = couponRepository.findByCode(normalizedCode).orElseThrow();
             throw couponAfterIncrement.isLimitReached() ? new CouponLimitReachedException(normalizedCode) :
-                    new RuntimeException("Coupon usage was not increased. Unknown error occurred. Coupon data: " + couponAfterIncrement);
+                    new IllegalStateException("Coupon usage was not increased. Unknown error occurred. Coupon data: " + couponAfterIncrement);
         }
 
         return couponUsage;
