@@ -1,6 +1,5 @@
 package com.pk.couponRedemption.service.geolocation;
 
-import com.pk.couponRedemption.exception.geolocation.UserCountryCodeParseException;
 
 public interface UserGeolocationStrategy {
     String getUserCountryCode(String ipAddress) throws GeolocationParseException;

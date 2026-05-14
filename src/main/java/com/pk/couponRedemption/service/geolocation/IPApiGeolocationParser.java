@@ -4,10 +4,12 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClientResponseException;
 
+import java.time.Duration;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Slf4j
@@ -17,7 +19,10 @@ public class IPApiGeolocationParser implements UserGeolocationStrategy {
     private final AtomicLong rateLimitingResetTimestamp = new AtomicLong(0);
 
     public IPApiGeolocationParser() {
-        this.restClient = RestClient.builder().baseUrl(IP_API_BASE_URL).build();
+        SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
+        factory.setConnectTimeout(Duration.ofSeconds(2));
+        factory.setReadTimeout(Duration.ofSeconds(3));
+        this.restClient = RestClient.builder().baseUrl(IP_API_BASE_URL).requestFactory(factory).build();
     }
 
     IPApiGeolocationParser(RestClient.Builder restClient) {

@@ -27,7 +27,7 @@ public class CouponController {
 
     @PostMapping("/{code}/redemption")
     @ResponseStatus(HttpStatus.OK)
-    public CouponUsageResponse useCupon(@PathVariable String code, @Valid @RequestBody CouponUseRequest request, HttpServletRequest httpServletRequest) {
+    public CouponUsageResponse useCoupon(@PathVariable String code, @Valid @RequestBody CouponUseRequest request, HttpServletRequest httpServletRequest) {
         return couponRedemptionService.useCoupon(httpServletRequest.getRemoteAddr(), code, request.userId());
     }
 }
