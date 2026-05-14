@@ -11,13 +11,17 @@ import org.springframework.web.client.RestClientResponseException;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Slf4j
-public class IPApiGeolocation implements UserGeolocationStrategy {
+public class IPApiGeolocationParser implements UserGeolocationStrategy {
     private final static String IP_API_BASE_URL = "http://ip-api.com";
     private final RestClient restClient;
     private final AtomicLong rateLimitingResetTimestamp = new AtomicLong(0);
 
-    public IPApiGeolocation() {
+    public IPApiGeolocationParser() {
         this.restClient = RestClient.builder().baseUrl(IP_API_BASE_URL).build();
+    }
+
+    IPApiGeolocationParser(RestClient.Builder restClient) {
+        this.restClient = restClient.build();
     }
 
     @Override
@@ -29,7 +33,7 @@ public class IPApiGeolocation implements UserGeolocationStrategy {
 
         try {
             ResponseEntity<IpCountryResponse> entity = restClient.get()
-                    .uri("/json/{ip}?fields=countryCode,status", ipAddress)
+                    .uri("/json/{ip}?fields=countryCode,status,message", ipAddress)
                     .retrieve()
                     .toEntity(IpCountryResponse.class);
 

@@ -1,6 +1,6 @@
 package com.pk.couponRedemption.config;
 
-import com.pk.couponRedemption.service.geolocation.IPApiGeolocation;
+import com.pk.couponRedemption.service.geolocation.IPApiGeolocationParser;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 public class GeoLocationConfig {
 
     @Bean
-    public IPApiGeolocation ipApiGeolocation() {
-        return new IPApiGeolocation();
+    public IPApiGeolocationParser ipApiGeolocation() {
+        return new IPApiGeolocationParser();
     }
 }
