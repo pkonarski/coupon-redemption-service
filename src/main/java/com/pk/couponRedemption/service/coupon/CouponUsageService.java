@@ -30,7 +30,7 @@ public class CouponUsageService {
         if(fetchedCoupon.isEmpty()) throw new CouponNotFoundException(normalizedCode, countryCode);
         if(!fetchedCoupon.get().getCountryCode().equals(countryCode)) throw new CouponReservedForDifferentCountryException(normalizedCode, countryCode);
 
-        CouponUsage couponUsage = createCouponUsage(fetchedCoupon.get(), userId);
+        CouponUsage couponUsage = registerCouponUsage(fetchedCoupon.get(), userId);
 
         int incremented = couponRepository.incrementCodeUsage(normalizedCode);
 
@@ -43,7 +43,7 @@ public class CouponUsageService {
         return couponUsage;
     }
 
-    private CouponUsage createCouponUsage(Coupon coupon, String userId) {
+    private CouponUsage registerCouponUsage(Coupon coupon, String userId) {
         try {
             CouponUsage couponUsage = CouponUsage.create(coupon, userId);
             return couponUsageRepository.saveAndFlush(couponUsage);
